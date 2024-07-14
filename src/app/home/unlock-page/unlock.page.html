@@ -1,0 +1,20 @@
+<ion-content class="ion-padding-horizontal">
+
+    <section class="decrypt-input-section">
+        <p>Enter your private key</p>
+        <textarea rows="3" #privateKeyPair></textarea>
+        <p>Enter your source</p>
+        <textarea rows="3" #encryptedString></textarea>
+        <p style="text-align: center;">Or</p>
+        <input type="file" #fileInput>
+        <input type="button" value="Decrypt" (click)="decryptData(privateKeyPair.value, encryptedString.value)">
+    </section>
+
+    <section class="decrypt-output-section">
+        <p>Result</p>
+        <textarea rows="3" [(ngModel)]="responseText"></textarea>
+    </section>
+
+</ion-content>
+
+<app-footer></app-footer>

@@ -1,0 +1,11 @@
+<ion-content class="ion-padding-horizontal">
+    <input type="button" value="Generate Keys" (click)="generateKeys()">
+
+    <p>Public Key</p>
+    <textarea rows="5" [(ngModel)]="publicKey"></textarea>
+
+    <p>Private Key</p>
+    <textarea rows="5" [(ngModel)]="privateKey"></textarea>
+</ion-content>
+
+<app-footer></app-footer>

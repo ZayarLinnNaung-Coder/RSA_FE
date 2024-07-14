@@ -1,0 +1,20 @@
+<ion-content class="ion-padding-horizontal">
+
+    <section class="encrypt-input-section">
+        <p>Enter your public key</p>
+        <textarea rows="3" #publicKeyPair></textarea>
+        <p>Enter your source</p>
+        <textarea rows="3" #message></textarea>
+        <p style="text-align: center;">Or</p>
+        <input type="file" #fileInput>
+        <input type="button" (click)="encryptData(publicKeyPair.value, message.value)" value="Encrypt">
+    </section>
+
+    <section class="encrypt-output-section">
+        <p>Result</p>
+        <textarea rows="3" [(ngModel)]="responseText"></textarea>
+    </section>
+
+</ion-content>
+
+<app-footer></app-footer>
