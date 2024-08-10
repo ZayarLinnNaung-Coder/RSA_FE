@@ -48,3 +48,49 @@ input, textarea{
   outline: none !important;
   padding: 5px;
 }
+
+.loading-screen{
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-color: #33333355;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 60px;
+  height: 16px;
+  display: grid;
+}
+.loader:before,
+.loader:after {
+  content: "";
+  grid-area: 1/1;
+  --c:no-repeat linear-gradient(#046D8B 0 0);
+  background: var(--c), var(--c), var(--c);
+  animation: l16-1 1.5s infinite linear, l16-2 1.5s infinite linear;
+  transform: scale(var(--s,1)) translate(3px,-3px);
+}
+.loader:after {
+  --s:-1;
+}
+@keyframes l16-1 {
+  0%,
+  3%    {background-size: 0    4px,4px 0   ,0    4px}
+  16.67%{background-size: 100% 4px,4px 0   ,0    4px}
+  33.33%{background-size: 100% 4px,4px 100%,0    4px}
+  46%,
+  54%   {background-size: 100% 4px,4px 100%,100% 4px}
+  66.67%{background-size: 0    4px,4px 100%,100% 4px}
+  83.33%{background-size: 0    4px,4px 0   ,100% 4px}
+  96%,
+  100%  {background-size: 0    4px,4px 0   ,0    4px}
+}
+@keyframes l16-2 {
+  0%,49.9%{background-position: 0    0,100% 0   ,100% 100%}
+  50%,100%{background-position: 100% 0,100% 100%,0    100%}
+}

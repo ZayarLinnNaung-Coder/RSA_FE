@@ -1,12 +1,24 @@
+<div class="loading-screen" *ngIf="showLoading">
+    <div class="loader"></div>
+</div>
+
 <ion-content class="ion-padding-horizontal">
 
     <section class="decrypt-input-section">
         <p>Enter your private key</p>
         <textarea rows="3" #privateKeyPair></textarea>
-        <p>Enter your source</p>
-        <textarea rows="3" #encryptedString></textarea>
+        <div class="title">
+            <p>Enter your source</p>
+            <div>
+                <span>{{txtFileInput.files?.item(0)?.name}}</span>
+                <img src="../../../assets/images/upload-cloud.svg" alt="" (click)="txtFileInput.click()">
+            </div>
+        </div>
+        <input type="file" #txtFileInput [disabled]="disabledTxtFileInput" (change)="changeTxtFileInput()" accept=".txt" style="display: none;">
+        
+        <textarea rows="3" #encryptedString [disabled]="disabledTextArea" (keyup)="changeTextArea(encryptedString.value)"></textarea>
         <p style="text-align: center;">Or</p>
-        <input type="file" #fileInput>
+        <input type="file" #fileInput [disabled]="disabledFileInput" (change)="changeFileInput()">
         <input type="button" value="Decrypt" (click)="decryptData(privateKeyPair.value, encryptedString.value)">
     </section>
 

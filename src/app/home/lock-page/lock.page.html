@@ -1,12 +1,24 @@
+<div class="loading-screen" *ngIf="showLoading">
+    <div class="loader"></div>
+</div>
+
 <ion-content class="ion-padding-horizontal">
 
+    
     <section class="encrypt-input-section">
         <p>Enter your public key</p>
         <textarea rows="3" #publicKeyPair></textarea>
-        <p>Enter your source</p>
-        <textarea rows="3" #message></textarea>
+        <div class="title">
+            <p>Enter your source</p>
+            <div>
+                <span>{{txtFileInput.files?.item(0)?.name}}</span>
+                <img src="../../../assets/images/upload-cloud.svg" alt="" (click)="txtFileInput.click()">
+            </div>
+        </div>  
+        <input type="file" #txtFileInput [disabled]="disabledTxtFileInput" (change)="changeTxtFileInput()" accept=".txt" style="display: none;">
+        <textarea rows="3" #message [disabled]="disabledTextArea" (keyup)="changeTextArea(message.value)"></textarea>
         <p style="text-align: center;">Or</p>
-        <input type="file" #fileInput>
+        <input type="file" #fileInput [disabled]="disabledFileInput" (change)="changeFileInput()">
         <input type="button" (click)="encryptData(publicKeyPair.value, message.value)" value="Encrypt">
     </section>
 
