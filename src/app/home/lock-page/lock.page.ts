@@ -15,6 +15,8 @@ export class LockPage{
   disabledTextArea = false
   disabledTxtFileInput = false
   disabledFileInput = false
+
+  textLength : number = 0
   
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
   @ViewChild('txtFileInput', { static: false }) txtFileInput!: ElementRef;
@@ -46,6 +48,8 @@ export class LockPage{
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
+      }, error => {
+        this.showLoading = false
       })
 
     } else {
@@ -57,6 +61,8 @@ export class LockPage{
       this.http.post(UrlConstants.BASE_URL + "/rsa/encrypt/message", formData).subscribe((response: any) => {
         this.responseText = response.message
         this.showLoading = false
+      }, error => {
+        this.showLoading = false
       })
     }
 
@@ -66,12 +72,34 @@ export class LockPage{
     const result = (message != '')
     this.disabledFileInput = result
     this.disabledTxtFileInput = result
+
+    this.textLength = message.length  
   }
 
   changeTxtFileInput() {
-    const result = this.txtFileInput.nativeElement.files.length != 0
-    this.disabledTextArea = result
-    this.disabledFileInput = result
+    const files = this.txtFileInput.nativeElement.files
+    const reader = new FileReader();
+
+    reader.addEventListener(
+      "load",
+      () => {
+        console.log(reader.result)
+        if((reader.result as string).length > 1000){
+          alert("Text file size is greater than 1000")
+          console.log(this.txtFileInput.nativeElement.value = '')
+        } else {
+
+          const result = files.length != 0
+          this.disabledTextArea = result
+          this.disabledFileInput = result
+
+        }
+
+      },
+      false,
+    );
+
+    reader.readAsText(files[0])
   }
 
   changeFileInput() {

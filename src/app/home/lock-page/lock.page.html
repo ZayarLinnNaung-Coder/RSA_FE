@@ -4,7 +4,6 @@
 
 <ion-content class="ion-padding-horizontal">
 
-    
     <section class="encrypt-input-section">
         <p>Enter your public key</p>
         <textarea rows="3" #publicKeyPair></textarea>
@@ -16,7 +15,8 @@
             </div>
         </div>  
         <input type="file" #txtFileInput [disabled]="disabledTxtFileInput" (change)="changeTxtFileInput()" accept=".txt" style="display: none;">
-        <textarea rows="3" #message [disabled]="disabledTextArea" (keyup)="changeTextArea(message.value)"></textarea>
+        <textarea rows="3" #message [disabled]="disabledTextArea" (keyup)="changeTextArea(message.value)" maxlength="1000"></textarea>
+        <p style="text-align: right;">{{textLength}}/1000</p>
         <p style="text-align: center;">Or</p>
         <input type="file" #fileInput [disabled]="disabledFileInput" (change)="changeFileInput()">
         <input type="button" (click)="encryptData(publicKeyPair.value, message.value)" value="Encrypt">
