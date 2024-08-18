@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import {Component, ElementRef, ViewChild } from '@angular/core';
+import * as saveAs from 'file-saver';
 import { UrlConstants } from 'src/app/constants/UrlConstants';
 
 @Component({
@@ -41,13 +42,15 @@ export class LockPage{
 
       this.http.post(url, formData, { responseType: 'blob' }).subscribe(blob => {
         this.showLoading = false
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = selectedFile.name;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        // const url = window.URL.createObjectURL(blob);
+        // const a = document.createElement('a');
+        // a.href = url;
+        // a.download = selectedFile.name;
+        // document.body.appendChild(a);
+        // a.click();
+        // document.body.removeChild(a);
+        saveAs(blob, 'test.txt');
+
       }, error => {
         this.showLoading = false
       })
